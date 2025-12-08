@@ -1,0 +1,89 @@
+/* 主布局 */
+.main-layout {
+    display: grid;
+    grid-template-columns: 350px 1fr 300px;
+    height: calc(100vh - 60px);
+    overflow: hidden;
+}
+
+/* 左侧面板 */
+.left-panel {
+    background: #f8f9fa;
+    padding: 20px;
+    border-right: 1px solid #e0e0e0;
+    overflow-y: auto;
+    height: 100%;
+}
+
+/* 中间画布区域 */
+.canvas-area {
+    background: white;
+    padding: 20px;
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+}
+
+/* 右侧面板 */
+.right-panel {
+    background: #f8f9fa;
+    padding: 20px;
+    border-left: 1px solid #e0e0e0;
+    overflow-y: auto;
+    height: 100%;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .main-layout {
+        grid-template-columns: 300px 1fr 280px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .main-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 500px auto;
+    }
+    
+    .left-panel, .right-panel {
+        border: none;
+        border-bottom: 1px solid #e0e0e0;
+        height: auto;
+        max-height: 400px;
+    }
+    
+    .canvas-area {
+        min-height: 500px;
+        height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-toolbar {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .toolbar-group {
+        flex-wrap: wrap;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .main-layout {
+        height: auto;
+        min-height: 100vh;
+    }
+}

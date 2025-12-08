@@ -1,0 +1,27 @@
+/* 顶部工具栏 */
+.top-toolbar {
+    background: #2c3e50;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1a1a2e;
+}
+
+.toolbar-group {
+    display: flex;
+    gap: 10px;
+}
+
+.status-info {
+    color: white;
+    font-size: 14px;
+    display: flex;
+    gap: 15px;
+}
+
+.collision-warning {
+    color: #ff416c;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+}
