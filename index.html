@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>圣诞树排列编辑器</title>
+    <title>Christmas Tree Arrangement Editor</title>
     
-    <!-- 拆分后的CSS文件 -->
+    <!-- Split CSS files -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/layout.css">
@@ -18,34 +18,34 @@
     <div class="top-toolbar">
         <div class="toolbar-group">
             <button class="btn btn-primary" onclick="exportCSV()">
-                📤 导出CSV
+                📤 Export CSV
             </button>
             <button class="btn btn-success" onclick="importCSV()">
-                📥 加载CSV
+                📥 Import CSV
             </button>
             <input type="file" id="csvInput" accept=".csv" style="display: none">
         </div>
         
         <div class="toolbar-group">
             <button class="btn btn-primary" onclick="centerView()">
-                🎯 居中
+                🎯 Center View
             </button>
             <button class="btn btn-primary" onclick="toggleGrid()">
-                📏 网格
+                📏 Toggle Grid
             </button>
             <button class="btn btn-primary" onclick="zoomIn()">
-                🔍 放大
+                🔍 Zoom In
             </button>
             <button class="btn btn-primary" onclick="zoomOut()">
-                🔎 缩小
+                🔎 Zoom Out
             </button>
         </div>
         
         <div class="status-info">
-            <span>碰撞: <span id="collisionCount" class="collision-warning">0</span></span>
-            <span>| 选择: <span id="selectedTree">无</span></span>
+            <span>Collisions: <span id="collisionCount" class="collision-warning">0</span></span>
+            <span>| Selected: <span id="selectedTree">None</span></span>
             <span style="font-size: 12px; color: #ddd; margin-left: 10px;">
-                💡 选中树后可用方向键移动
+                💡 Use arrow keys to move the selected tree
             </span>
         </div>
     </div>
@@ -57,26 +57,26 @@
             <!-- 添加圣诞树 -->
             <div class="section">
                 <div class="section-title">
-                    🌲 添加圣诞树
+                    🌲 Add Christmas Tree
                 </div>
                 <div class="form-group">
-                    <label>X坐标:</label>
+                    <label>X Position:</label>
                     <input type="number" id="treeX" step="0.01" value="0">
                 </div>
                 <div class="form-group">
-                    <label>Y坐标:</label>
+                    <label>Y Position:</label>
                     <input type="number" id="treeY" step="0.01" value="0">
                 </div>
                 <div class="form-group">
-                    <label>角度(°):</label>
+                    <label>Angle (°):</label>
                     <input type="number" id="treeAngle" step="0.01" value="0">
                 </div>
                 <div class="btn-group">
                     <button class="btn btn-success" onclick="addTree()">
-                        ➕ 添加树
+                        ➕ Add Tree
                     </button>
                     <button class="btn btn-warning" onclick="addRandomTree()">
-                        🎲 随机添加
+                        🎲 Add Random
                     </button>
                 </div>
             </div>
@@ -84,17 +84,18 @@
             <!-- 树列表 -->
             <div class="section">
                 <div class="section-title">
-                    📋 树列表 (共 <span id="treeCount">0</span> 棵)
+                    📋 Tree List (Total <span id="treeCount">0</span> trees)
                 </div>
                 <div class="tree-list" id="treeList">
                     <!-- 树项目将通过JS动态添加 -->
+                    <!-- Tree items will be added dynamically by JS -->
                 </div>
                 <div class="btn-group">
                     <button class="btn btn-danger" onclick="clearAllTrees()">
-                        🗑️ 清空所有
+                        🗑️ Clear All
                     </button>
                     <button class="btn btn-warning" onclick="removeSelectedTree()">
-                        ✖️ 删除选中
+                        ✖️ Remove Selected
                     </button>
                 </div>
             </div>
@@ -102,10 +103,10 @@
             <!-- 碰撞检测 -->
             <div class="section" id="collisionSection" style="display: none;">
                 <div class="section-title">
-                    ⚠️ 碰撞检测
+                    ⚠️ Collision Detection
                 </div>
                 <div id="collisionInfo">
-                    <!-- 碰撞信息将在这里显示 -->
+                    <!-- Collision information will be displayed here -->
                 </div>
             </div>
         </div>
@@ -122,15 +123,15 @@
             <!-- 统计信息 -->
             <div class="section">
                 <div class="section-title">
-                    📊 统计信息
+                    📊 Statistics
                 </div>
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-label">正方形面积</div>
+                        <div class="stat-label">Square Area</div>
                         <div class="stat-value" id="sideLength">0.000000000000000</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">分数 (面积/n)</div>
+                        <div class="stat-label">Score (Area / n)</div>
                         <div class="stat-value" id="score">0.000000000000000</div>
                     </div>
                 </div>
@@ -139,13 +140,13 @@
             <!-- 树详细信息面板（新增） -->
             <div class="section">
                 <div class="section-title">
-                    📝 树详细信息
+                    📝 Tree Details
                 </div>
                 <div id="treeDetails" class="details-panel">
                     <p style="color: #666; text-align: center; padding: 20px;">
-                        点击树以查看详细信息<br>
+                        Click a tree to view details<br>
                         <small style="color: #999; font-size: 12px;">
-                            提示：选中树后可使用方向键移动
+                            Tip: Use arrow keys to move the selected tree
                         </small>
                     </p>
                 </div>
@@ -154,30 +155,31 @@
     </div>
 
     <!-- 按依赖顺序加载JavaScript文件 -->
-    <!-- 1. 基础类 -->
+    <!-- Load JavaScript files in dependency order -->
+    <!-- 1. Core classes -->
     <script src="classes.js"></script>
     
-    <!-- 2. 工具库 -->
+    <!-- 2. Utility libraries -->
     <script src="geometry.js"></script>
     
-    <!-- 3. 画布相关（新拆分文件） -->
+    <!-- 3. Canvas-related (split files) -->
     <script src="canvas-init.js"></script>
     <script src="grid-axes.js"></script>
     <script src="bounding-box.js"></script>
     <script src="drawing-core.js"></script>
     
-    <!-- 4. 功能模块 -->
+    <!-- 4. Feature modules -->
     <script src="collision.js"></script>
     <script src="ui.js"></script>
     <script src="tree-operations.js"></script>
     <script src="file-operations.js"></script>
     <script src="interaction.js"></script>
     
-    <!-- 5. 主入口 -->
+    <!-- 5. Main entry -->
     <script src="main.js"></script>
     
     <script>
-        // 添加页面卸载时的清理
+        // Cleanup on page unload
         window.addEventListener('beforeunload', () => {
             if (window.canvasInit && window.canvasInit.cleanupCanvas) {
                 window.canvasInit.cleanupCanvas();
